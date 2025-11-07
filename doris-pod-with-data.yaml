@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: doris-ingest-pod
+spec:
+  containers:
+  - name: pipeline
+    image: python:3.11-slim
+    command: ["sleep", "infinity"]
+    workingDir: /app/scripts
+    env:
+    - name: DORIS_HOST
+      value: "host.docker.internal"  # This works in Minikube!
+    - name: DORIS_PORT
+      value: "9030"
+    - name: DORIS_FE_HTTP_PORT
+      value: "8030"
+    - name: DORIS_USER
+      value: "root"
+    - name: DORIS_PASS
+      value: ""
+    - name: DORIS_DB
+      value: "test2"
+    volumeMounts:
+    - name: code-volume
+      mountPath: /app
+  hostNetwork: false  # Use pod network, not host network
+  volumes:
+  - name: code-volume
+    hostPath:
+      path: /Minikube-Doris
+      type: Directory

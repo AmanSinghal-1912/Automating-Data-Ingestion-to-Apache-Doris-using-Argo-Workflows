@@ -1,0 +1,55 @@
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  name: csv-doris-cron
+  namespace: argo
+spec:
+  # Run every 5 minutes to check for new CSV files
+  schedule: "*/5 * * * *"
+  timezone: "America/New_York"  # Change to your timezone
+  
+  # Keep last 3 workflow runs for history
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  
+  workflowSpec:
+    entrypoint: main
+    
+    volumes:
+    - name: data-volume
+      hostPath:
+        path: /Minikube-Doris
+        type: Directory
+    
+    templates:
+    - name: main
+      container: 
+        image: python:3.11-slim 
+        command: ["/bin/bash", "-c"]
+        args:
+          - |
+            echo "=== Installing dependencies ==="
+            pip install -q pandas pymysql requests
+            
+            echo "=== Running CSV to Doris Pipeline ==="
+            cd /app/scripts
+            python3 pipeline_local.py
+            
+            echo "=== Pipeline Complete ==="
+        workingDir: /app
+        volumeMounts:
+        - name: data-volume
+          mountPath: /app
+        env:
+        - name: DORIS_HOST
+          value: "host.docker.internal"
+        - name: DORIS_PORT
+          value: "9030"
+        - name: DORIS_FE_HTTP_PORT
+          value: "8030"
+        - name: DORIS_USER
+          value: "root"
+        - name: DORIS_PASS
+          value: ""
+        - name: DORIS_DB
+          value: "updated_test2"

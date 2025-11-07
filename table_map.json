@@ -1,0 +1,4 @@
+{
+  "main_table": "main_data_table",
+  "main_schema": "age|avg_bpm|benefit|bmi|bmi_calc|body_part|burns_calories_bin|burns_calories_per_30_min|burns_calories_per_30_min_bc|cal_balance|cal_from_macros|calories|calories_burned|carbs|cholesterol_mg|cook_time_min|cooking_method|daily_meals_frequency|diet_type|difficulty_level|equipment_needed|expected_burn|experience_level|fat_percentage|fats|gender|height_m|lean_mass_kg|max_bpm|meal_name|meal_type|name_of_exercise|pct_carbs|pct_hrr|pct_maxhr|physical_exercise|prep_time_min|protein_per_kg|proteins|rating|reps|resting_bpm|serving_size_g|session_duration_hours|sets|sodium_mg|sugar_g|target_muscle_group|type_of_muscle|water_intake_liters|weight_kg|workout|workout_frequency_days/week|workout_type"
+}
