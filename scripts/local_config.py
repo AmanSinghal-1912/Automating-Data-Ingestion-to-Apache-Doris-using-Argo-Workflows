@@ -41,6 +41,14 @@ DORIS_FE_HTTP_PORT = get_doris_fe_http_port()
 DORIS_FE = get_doris_fe()
 DORIS_MYSQL_PORT = DORIS_PORT
 
+# Configuration dictionary for dashboard
+DORIS_CONFIG = {
+    'host': DORIS_HOST,
+    'port': DORIS_PORT,
+    'user': DORIS_USER,
+    'password': DORIS_PASS,
+    'database': DORIS_DB
+}
 
 for d in [CSV_DIR, STAGE_DIR, LOG_DIR]:
     os.makedirs(d, exist_ok=True)
