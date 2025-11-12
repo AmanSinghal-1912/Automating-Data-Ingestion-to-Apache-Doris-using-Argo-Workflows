@@ -1,4 +1,4 @@
-# Complete Project Documentation - From Scratch
+# Project Documentation 
 
 ## 📘 Table of Contents
 1. [Project Overview - Simple Explanation](#project-overview---simple-explanation)
